@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.mybatis.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.atguigu.mybatis.entities.User" >
+    <id column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR" />
+    <result column="COMPANY" property="company" jdbcType="BIT" />
+    <result column="CODE_ARR_STR" property="codeArrStr" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from survey_user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.mybatis.entities.User" >
+    insert into survey_user (USER_ID, USER_NAME, USER_PWD, 
+      COMPANY, CODE_ARR_STR)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
+      #{company,jdbcType=BIT}, #{codeArrStr,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.mybatis.entities.User" >
+    update survey_user
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      COMPANY = #{company,jdbcType=BIT},
+      CODE_ARR_STR = #{codeArrStr,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select USER_ID, USER_NAME, USER_PWD, COMPANY, CODE_ARR_STR
+    from survey_user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select USER_ID, USER_NAME, USER_PWD, COMPANY, CODE_ARR_STR
+    from survey_user
+  </select>
+</mapper>

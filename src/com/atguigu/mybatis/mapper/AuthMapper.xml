@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.mybatis.mapper.AuthMapper" >
+  <resultMap id="BaseResultMap" type="com.atguigu.mybatis.entities.Auth" >
+    <id column="AUTH_ID" property="authId" jdbcType="INTEGER" />
+    <result column="AUTH_NAME" property="authName" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from survey_auth
+    where AUTH_ID = #{authId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.mybatis.entities.Auth" >
+    insert into survey_auth (AUTH_ID, AUTH_NAME)
+    values (#{authId,jdbcType=INTEGER}, #{authName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.mybatis.entities.Auth" >
+    update survey_auth
+    set AUTH_NAME = #{authName,jdbcType=VARCHAR}
+    where AUTH_ID = #{authId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select AUTH_ID, AUTH_NAME
+    from survey_auth
+    where AUTH_ID = #{authId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select AUTH_ID, AUTH_NAME
+    from survey_auth
+  </select>
+</mapper>

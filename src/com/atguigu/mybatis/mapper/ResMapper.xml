@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.mybatis.mapper.ResMapper" >
+  <resultMap id="BaseResultMap" type="com.atguigu.mybatis.entities.Res" >
+    <id column="RES_ID" property="resId" jdbcType="INTEGER" />
+    <result column="SERVLET_PATH" property="servletPath" jdbcType="VARCHAR" />
+    <result column="RES_CODE" property="resCode" jdbcType="INTEGER" />
+    <result column="RES_POS" property="resPos" jdbcType="INTEGER" />
+    <result column="PUBLIC_RES" property="publicRes" jdbcType="BIT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from survey_res
+    where RES_ID = #{resId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.mybatis.entities.Res" >
+    insert into survey_res (RES_ID, SERVLET_PATH, RES_CODE, 
+      RES_POS, PUBLIC_RES)
+    values (#{resId,jdbcType=INTEGER}, #{servletPath,jdbcType=VARCHAR}, #{resCode,jdbcType=INTEGER}, 
+      #{resPos,jdbcType=INTEGER}, #{publicRes,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.mybatis.entities.Res" >
+    update survey_res
+    set SERVLET_PATH = #{servletPath,jdbcType=VARCHAR},
+      RES_CODE = #{resCode,jdbcType=INTEGER},
+      RES_POS = #{resPos,jdbcType=INTEGER},
+      PUBLIC_RES = #{publicRes,jdbcType=BIT}
+    where RES_ID = #{resId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select RES_ID, SERVLET_PATH, RES_CODE, RES_POS, PUBLIC_RES
+    from survey_res
+    where RES_ID = #{resId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select RES_ID, SERVLET_PATH, RES_CODE, RES_POS, PUBLIC_RES
+    from survey_res
+  </select>
+</mapper>

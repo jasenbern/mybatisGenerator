@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.mybatis.mapper.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.atguigu.mybatis.entities.Answer" >
+    <id column="ANSWER_ID" property="answerId" jdbcType="INTEGER" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="QUESTION_ID" property="questionId" jdbcType="INTEGER" />
+    <result column="SURVEY_ID" property="surveyId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from survey_answer
+    where ANSWER_ID = #{answerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.mybatis.entities.Answer" >
+    insert into survey_answer (ANSWER_ID, CONTENT, UUID, 
+      QUESTION_ID, SURVEY_ID)
+    values (#{answerId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, 
+      #{questionId,jdbcType=INTEGER}, #{surveyId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.mybatis.entities.Answer" >
+    update survey_answer
+    set CONTENT = #{content,jdbcType=VARCHAR},
+      UUID = #{uuid,jdbcType=VARCHAR},
+      QUESTION_ID = #{questionId,jdbcType=INTEGER},
+      SURVEY_ID = #{surveyId,jdbcType=INTEGER}
+    where ANSWER_ID = #{answerId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select ANSWER_ID, CONTENT, UUID, QUESTION_ID, SURVEY_ID
+    from survey_answer
+    where ANSWER_ID = #{answerId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ANSWER_ID, CONTENT, UUID, QUESTION_ID, SURVEY_ID
+    from survey_answer
+  </select>
+</mapper>
